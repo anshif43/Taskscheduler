@@ -1,1 +1,1 @@
-# Taskscheduler
+Welcome to the Project Task Scheduler! This lightweight task management tool is designed to streamline your project workflow, making it easier than ever to organize, assign, and track tasks efficiently.
