@@ -1,0 +1,88 @@
+﻿@model List<Taskschedule>
+@{
+    ViewData["Title"] = "Index";
+    Pager pager = new Pager();
+    int pageno = 0;
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageno = pager.Currentpage;
+    }
+}
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Tasks List
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Taskscheduler" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>  Create New Task
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var items in Model.OrderBy(x=>x.Id))
+        {
+            <tr>
+                <td>@items.Name</td>
+                <td>@items.Description</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Taskscheduler" asp-action="Details" asp-route-id="@items.Id" class="btn btn-info mx-2">
+                            <i class="bi bi-eye"></i>Show
+                        </a>
+                        <a asp-controller="Taskscheduler" asp-action="Edit" asp-route-id="@items.Id" class="btn btn-warning mx-2">
+                            <i class="bi bi-pencil-square"></i>Edit
+                        </a>
+                        <a asp-controller="Taskscheduler" asp-action="Delete" asp-route-id="@items.Id" class="btn btn-danger mx-2">
+                            <i class="bi bi-trash-fill"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@* <div class="container">
+    @if(pager.Totalpages >0)
+    {
+        <ul class="pagination justify-content-end">
+            @if(pager.Currentpage >1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Taskscheduler" asp-action="Index" asp-route-pg="1">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Taskscheduler" asp-action="Index" asp-route-pg="@(pager.Currentpage - 1)">Previous</a>
+                </li>
+            }
+            @for(var pge = pager.Startpage; pge<=pager.Endpage;pge++)
+            {
+                <li class="page-item @(pge == pager.Currentpage ? "active":"")">
+                    <a class="page-link"  asp-controller="Taskscheduler" asp-action="Index" asp-route-pg = "@pge">@pge</a>
+                </li>
+            }
+            @if(pager.Currentpage < pager.Totalpages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Taskscheduler" asp-action="Index" asp-route-pg="@(pager.Currentpage+1)">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Taskscheduler" asp-action="Index" asp-route-pg="@(pager.Totalpages)">Last</a>
+                </li>
+            }
+        </ul>
+    }
+</div> *@
+<partial name="_Pager" model="@pager" />

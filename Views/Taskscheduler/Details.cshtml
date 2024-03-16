@@ -1,0 +1,12 @@
+﻿@model Taskschedule
+<div class="container">
+    <dl class="row">
+        <dt>Name</dt>
+        <dd>@Html.DisplayFor(item=>item.Name)</dd>
+        <dt>Description</dt>
+        <dd>@Html.DisplayFor(item=>item.Description)</dd>
+    </dl>
+    <div class="col-6 col-md-3">
+        <a asp-controller="Taskscheduler" asp-action="Index" class="btn btn-outline-secondary border form-control">Back to List</a>
+    </div>
+</div>
